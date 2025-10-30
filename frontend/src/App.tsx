@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react"
 import ProductCard from "./components/ProductCard"
-import Cart from "./components/Cart"
+import Cart from "./components/Cart/Cart"
 import { Product, CartItem } from "./types"
 import { GlobalStyles } from "./styles/GlobalStyles"
 import {
@@ -38,7 +38,7 @@ function App() {
 
   const addToCart = (product: Product) => {
     const existingItem = cartItems.find(
-      (item) => item.product.id === product.id,
+      (item) => item.product.id === product.id
     )
 
     if (existingItem) {
@@ -46,8 +46,8 @@ function App() {
         cartItems.map((item) =>
           item.product.id === product.id
             ? { ...item, quantity: item.quantity + 1 }
-            : item,
-        ),
+            : item
+        )
       )
     } else {
       setCartItems([...cartItems, { product, quantity: 1 }])
@@ -61,8 +61,8 @@ function App() {
     }
     setCartItems(
       cartItems.map((item) =>
-        item.product.id === productId ? { ...item, quantity } : item,
-      ),
+        item.product.id === productId ? { ...item, quantity } : item
+      )
     )
   }
 

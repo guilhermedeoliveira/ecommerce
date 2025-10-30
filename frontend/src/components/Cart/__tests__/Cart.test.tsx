@@ -1,6 +1,6 @@
 import { render, screen } from "@testing-library/react"
 import userEvent from "@testing-library/user-event"
-import Cart from "../Cart"
+import Cart from "../Cart/Cart"
 import { CartItem } from "../../types"
 
 describe("Cart", () => {
