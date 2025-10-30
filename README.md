@@ -81,7 +81,7 @@ npm run dev
 
 Or run them separately:
 ```bash
-# Terminal 1 - Backend (runs on http://localhost:5000)
+# Terminal 1 - Backend (runs on http://localhost:4000)
 npm run dev:backend
 
 # Terminal 2 - Frontend (runs on http://localhost:3000)
