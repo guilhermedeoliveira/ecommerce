@@ -26,7 +26,7 @@ export default function Cart({
 }: CartProps) {
   const total = items.reduce(
     (sum, item) => sum + item.product.price * item.quantity,
-    0,
+    0
   )
 
   if (items.length === 0) {
