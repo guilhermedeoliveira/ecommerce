@@ -8,7 +8,11 @@
     "build": "tsc",
     "start": "node dist/index.js"
   },
-  "keywords": ["ecommerce", "api", "express"],
+  "keywords": [
+    "ecommerce",
+    "api",
+    "express"
+  ],
   "author": "",
   "license": "ISC",
   "dependencies": {

@@ -1,22 +1,22 @@
 export interface Product {
-  id: string;
-  name: string;
-  description: string;
-  price: number;
-  image: string;
-  category: string;
-  stock: number;
+  id: string
+  name: string
+  description: string
+  price: number
+  image: string
+  category: string
+  stock: number
 }
 
 export interface CartItem {
-  productId: string;
-  quantity: number;
+  productId: string
+  quantity: number
 }
 
 export interface Order {
-  id: string;
-  items: CartItem[];
-  total: number;
-  status: 'pending' | 'confirmed' | 'shipped' | 'delivered';
-  createdAt: Date;
+  id: string
+  items: CartItem[]
+  total: number
+  status: "pending" | "confirmed" | "shipped" | "delivered"
+  createdAt: Date
 }

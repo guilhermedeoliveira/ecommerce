@@ -1,4 +1,4 @@
-import { Product } from '../types';
+import { Product } from "../types"
 import {
   Card,
   ProductImage,
@@ -7,21 +7,21 @@ import {
   ProductDescription,
   ProductFooter,
   ProductPrice,
-  AddToCartButton
-} from './ProductCard.styled';
+  AddToCartButton,
+} from "./ProductCard.styled"
 
 interface ProductCardProps {
-  product: Product;
-  onAddToCart: (product: Product) => void;
+  product: Product
+  onAddToCart: (product: Product) => void
 }
 
-export default function ProductCard({ product, onAddToCart }: ProductCardProps) {
+export default function ProductCard({
+  product,
+  onAddToCart,
+}: ProductCardProps) {
   return (
     <Card>
-      <ProductImage
-        src={product.image}
-        alt={product.name}
-      />
+      <ProductImage src={product.image} alt={product.name} />
       <ProductInfo>
         <ProductName>{product.name}</ProductName>
         <ProductDescription>{product.description}</ProductDescription>
@@ -31,10 +31,10 @@ export default function ProductCard({ product, onAddToCart }: ProductCardProps) 
             onClick={() => onAddToCart(product)}
             disabled={product.stock === 0}
           >
-            {product.stock === 0 ? 'Out of Stock' : 'Add to Cart'}
+            {product.stock === 0 ? "Out of Stock" : "Add to Cart"}
           </AddToCartButton>
         </ProductFooter>
       </ProductInfo>
     </Card>
-  );
+  )
 }

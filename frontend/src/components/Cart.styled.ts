@@ -1,4 +1,4 @@
-import styled from 'styled-components';
+import styled from "styled-components"
 
 export const CartContainer = styled.div`
   background: white;
@@ -10,14 +10,14 @@ export const CartContainer = styled.div`
     margin-bottom: 1.5rem;
     color: #2c3e50;
   }
-`;
+`
 
 export const CartItem = styled.div`
   display: flex;
   align-items: center;
   padding: 1rem;
   border-bottom: 1px solid #ecf0f1;
-`;
+`
 
 export const CartItemImage = styled.img`
   width: 80px;
@@ -25,28 +25,28 @@ export const CartItemImage = styled.img`
   object-fit: cover;
   border-radius: 4px;
   margin-right: 1rem;
-`;
+`
 
 export const CartItemInfo = styled.div`
   flex: 1;
-`;
+`
 
 export const CartItemName = styled.div`
   font-weight: 600;
   color: #2c3e50;
   margin-bottom: 0.5rem;
-`;
+`
 
 export const CartItemPrice = styled.div`
   color: #27ae60;
   font-weight: bold;
-`;
+`
 
 export const CartItemQuantity = styled.div`
   display: flex;
   align-items: center;
   gap: 1rem;
-`;
+`
 
 export const QuantityButton = styled.button`
   background-color: #3498db;
@@ -69,7 +69,7 @@ export const QuantityButton = styled.button`
     background-color: #95a5a6;
     cursor: not-allowed;
   }
-`;
+`
 
 export const RemoveButton = styled.button`
   background-color: #e74c3c;
@@ -83,7 +83,7 @@ export const RemoveButton = styled.button`
   &:hover {
     background-color: #c0392b;
   }
-`;
+`
 
 export const CartTotal = styled.div`
   margin-top: 2rem;
@@ -96,10 +96,10 @@ export const CartTotal = styled.div`
     color: #2c3e50;
     margin: 0;
   }
-`;
+`
 
 export const EmptyCart = styled.div`
   text-align: center;
   padding: 3rem;
   color: #7f8c8d;
-`;
+`

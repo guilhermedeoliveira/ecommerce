@@ -14,7 +14,12 @@
     "start:frontend": "cd frontend && npm run preview",
     "start": "npm run start:backend & npm run start:frontend"
   },
-  "keywords": ["ecommerce", "fullstack", "react", "express"],
+  "keywords": [
+    "ecommerce",
+    "fullstack",
+    "react",
+    "express"
+  ],
   "author": "",
   "license": "ISC"
 }
