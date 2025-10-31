@@ -1,6 +1,6 @@
 # E-Commerce Fullstack Project
 
-A simple fullstack e-commerce application built with React, TypeScript, Express, and Node.js for learning purposes.
+A simple fullstack e-commerce application built with React, TypeScript, Express, and Node.js.
 
 ## Project Structure
 
@@ -45,11 +45,13 @@ ecommerce/
 ## Installation
 
 1. Install dependencies for all projects:
+
 ```bash
 npm run install:all
 ```
 
 Or manually:
+
 ```bash
 # Install root dependencies
 npm install
@@ -64,6 +66,7 @@ npm install
 ```
 
 2. Set up environment variables:
+
 ```bash
 # In the backend directory, create a .env file
 cd backend
@@ -75,11 +78,13 @@ cp .env.example .env
 ### Development Mode (Recommended)
 
 Run both frontend and backend concurrently:
+
 ```bash
 npm run dev
 ```
 
 Or run them separately:
+
 ```bash
 # Terminal 1 - Backend (runs on http://localhost:4000)
 npm run dev:backend
@@ -91,6 +96,7 @@ npm run dev:frontend
 ### Production Mode
 
 Build and start both:
+
 ```bash
 npm run build
 npm start
@@ -99,6 +105,7 @@ npm start
 ## Available Scripts
 
 ### Root Level
+
 - `npm run install:all` - Install all dependencies
 - `npm run dev` - Run both backend and frontend in development mode
 - `npm run dev:backend` - Run only backend in development mode
@@ -107,11 +114,13 @@ npm start
 - `npm run start` - Start both backend and frontend in production mode
 
 ### Backend (cd backend)
+
 - `npm run dev` - Start development server with hot reload
 - `npm run build` - Compile TypeScript to JavaScript
 - `npm start` - Start production server
 
 ### Frontend (cd frontend)
+
 - `npm run dev` - Start development server
 - `npm run build` - Build for production
 - `npm run preview` - Preview production build
@@ -126,6 +135,7 @@ npm start
 ## Tech Stack
 
 ### Backend
+
 - Node.js
 - Express
 - TypeScript
@@ -133,14 +143,16 @@ npm start
 - dotenv
 
 ### Frontend
+
 - React 18
 - TypeScript
 - Vite
 - CSS3
 
-## Learning Points
+## Features
 
 This project demonstrates:
+
 - Full-stack TypeScript development
 - RESTful API design
 - React hooks (useState, useEffect)
