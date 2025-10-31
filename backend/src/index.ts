@@ -1,6 +1,9 @@
 import express, { Application, Request, Response } from "express"
 import cors from "cors"
 import dotenv from "dotenv"
+
+import pool from "./config/postgres"
+import { connectMongoDB } from "./config/mongodb"
 import productsRouter from "./routes/products"
 
 dotenv.config()
@@ -24,3 +27,24 @@ app.use("/api/products", productsRouter)
 app.listen(PORT, () => {
   console.log(`Server is running on http://localhost:${PORT}`)
 })
+
+// Test DB connections
+const testConnections = async () => {
+  // Test PostgreSQL connection
+  try {
+    const result = await pool.query("SELECT NOW()")
+    console.log("PostgreSQL connection successful: ", { result: result.rows[0] })
+  } catch (error) {
+    console.error("PostgreSQL connection error:", { error })
+  }
+
+  // Test MongoDB connection
+  try {
+    await connectMongoDB()
+    console.log("MongoDB connection successful")
+  } catch (error) {
+    console.error("MongoDB connection error:", { error })
+  }
+}
+
+testConnections()

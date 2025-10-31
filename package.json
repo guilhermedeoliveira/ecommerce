@@ -12,7 +12,16 @@
     "build": "npm run build:backend && npm run build:frontend",
     "start:backend": "cd backend && npm start",
     "start:frontend": "cd frontend && npm run preview",
-    "start": "npm run start:backend & npm run start:frontend"
+    "start": "npm run start:backend & npm run start:frontend",
+    "docker:up": "docker-compose up -d",
+    "docker:down": "docker-compose down",
+    "docker:logs": "docker-compose logs -f",
+    "docker:logs:postgres": "docker-compose logs -f postgres",
+    "docker:logs:mongodb": "docker-compose logs -f mongodb",
+    "docker:restart": "docker-compose restart",
+    "docker:ps": "docker-compose ps",
+    "docker:clean": "docker-compose down -v",
+    "docker:build": "docker-compose up -d --build"
   },
   "keywords": [
     "ecommerce",

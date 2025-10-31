@@ -6,24 +6,32 @@ A simple fullstack e-commerce application built with React, TypeScript, Express,
 
 ```
 ecommerce/
-├── backend/           # Express API server
+├── backend/                    # Express API server
 │   ├── src/
-│   │   ├── routes/    # API routes
-│   │   ├── types/     # TypeScript interfaces
-│   │   ├── data/      # Mock data
-│   │   └── index.ts   # Server entry point
+│   │   ├── config/            # Database configurations
+│   │   │   ├── postgres.ts    # PostgreSQL connection
+│   │   │   └── mongodb.ts     # MongoDB connection
+│   │   ├── databases/         # Database initialization
+│   │   │   ├── postgres/      # PostgreSQL init scripts
+│   │   │   └── mongodb/       # MongoDB init scripts
+│   │   ├── routes/            # API routes
+│   │   ├── types/             # TypeScript interfaces
+│   │   ├── data/              # Mock data
+│   │   └── index.ts           # Server entry point
 │   ├── package.json
 │   └── tsconfig.json
-├── frontend/          # React application
+├── frontend/                   # React application
 │   ├── src/
-│   │   ├── components/ # React components
-│   │   ├── types/      # TypeScript interfaces
-│   │   ├── styles/     # CSS files
-│   │   ├── App.tsx     # Main App component
-│   │   └── main.tsx    # Entry point
+│   │   ├── components/        # React components
+│   │   ├── types/             # TypeScript interfaces
+│   │   ├── styles/            # CSS files
+│   │   ├── App.tsx            # Main App component
+│   │   └── main.tsx           # Entry point
 │   ├── package.json
 │   └── vite.config.ts
-└── package.json       # Root scripts
+├── docker-compose.yml         # Docker services configuration
+├── .env.example               # Environment variables template
+└── package.json               # Root scripts
 ```
 
 ## Features
@@ -41,6 +49,7 @@ ecommerce/
 
 - Node.js (v16 or higher)
 - npm or yarn
+- Docker and Docker Compose (for database setup)
 
 ## Installation
 
@@ -68,14 +77,39 @@ npm install
 2. Set up environment variables:
 
 ```bash
-# In the backend directory, create a .env file
-cd backend
+# Copy the environment template
 cp .env.example .env
 ```
 
+3. Start the databases with Docker Compose:
+
+```bash
+# Start PostgreSQL and MongoDB
+npm run docker:up
+```
+
+This will start both databases in containers. The databases will automatically initialize with the schemas defined in:
+
+- `backend/src/databases/postgres/init.sql`
+- `backend/src/databases/mongodb/init.js`
+
 ## Running the Application
 
-### Development Mode (Recommended)
+### 1. Start Databases
+
+Make sure Docker is running, then start the databases:
+
+```bash
+npm run docker:up
+```
+
+You can verify the databases are running with:
+
+```bash
+npm run docker:ps
+```
+
+### 2. Development Mode (Recommended)
 
 Run both frontend and backend concurrently:
 
@@ -92,6 +126,11 @@ npm run dev:backend
 # Terminal 2 - Frontend (runs on http://localhost:3000)
 npm run dev:frontend
 ```
+
+**Note:** When running the backend, it will automatically connect to:
+
+- PostgreSQL on `postgres:5432` (when in Docker) or `localhost:5432` (when running locally)
+- MongoDB on `mongodb:27017` (when in Docker) or `localhost:27017` (when running locally)
 
 ### Production Mode
 
@@ -112,6 +151,18 @@ npm start
 - `npm run dev:frontend` - Run only frontend in development mode
 - `npm run build` - Build both backend and frontend
 - `npm run start` - Start both backend and frontend in production mode
+
+### Docker Commands
+
+- `npm run docker:up` - Start PostgreSQL and MongoDB containers
+- `npm run docker:down` - Stop all database containers
+- `npm run docker:logs` - View logs from all database containers
+- `npm run docker:logs:postgres` - View PostgreSQL logs only
+- `npm run docker:logs:mongodb` - View MongoDB logs only
+- `npm run docker:restart` - Restart all database containers
+- `npm run docker:ps` - Show status of all containers
+- `npm run docker:clean` - Stop containers and remove all volumes (⚠️ deletes data)
+- `npm run docker:build` - Build and start containers
 
 ### Backend (cd backend)
 
@@ -139,8 +190,16 @@ npm start
 - Node.js
 - Express
 - TypeScript
+- PostgreSQL (via `pg`)
+- MongoDB (via `mongodb`)
 - CORS
 - dotenv
+
+### Databases
+
+- **PostgreSQL 15** - Relational database for structured data (products, orders, etc.)
+- **MongoDB 7** - Document database for flexible data (user sessions, logs, etc.)
+- **Docker Compose** - Container orchestration for local development
 
 ### Frontend
 
@@ -163,10 +222,30 @@ This project demonstrates:
 - npm scripts organization
 - Monorepo structure
 
+## Database Configuration
+
+The project uses Docker Compose to run PostgreSQL and MongoDB locally. Both databases are configured in `docker-compose.yml` and connect via a shared network.
+
+### PostgreSQL
+
+- Default connection: `postgres:5432` (when using Docker) or `localhost:5432` (local)
+- Database: `ecommerce_db`
+- Initial schema: Defined in `backend/src/databases/postgres/init.sql`
+
+### MongoDB
+
+- Default connection: `mongodb:27017` (when using Docker) or `localhost:27017` (local)
+- Database: `ecommerce_db`
+- Initial setup: Defined in `backend/src/databases/mongodb/init.js`
+
+### Adding More Databases
+
+To add additional databases, simply add them to `docker-compose.yml` following the same pattern, and create corresponding configuration files in `backend/src/config/`.
+
 ## Next Steps for Enhancement
 
 - Add user authentication
-- Implement persistent storage (database)
+- Expand database schemas and collections
 - Add product search and filtering
 - Implement checkout process
 - Add payment integration
