@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react"
 import ProductCard from "./components/ProductCard"
 import Cart from "./components/Cart/Cart"
-import { Product, CartItem } from "./types"
+import { Product, CartItem } from "../../types"
 import { GlobalStyles } from "./styles/GlobalStyles"
 import {
   AppContainer,
