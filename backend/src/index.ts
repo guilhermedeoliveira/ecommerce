@@ -33,7 +33,9 @@ const testConnections = async () => {
   // Test PostgreSQL connection
   try {
     const result = await pool.query("SELECT NOW()")
-    console.log("PostgreSQL connection successful: ", { result: result.rows[0] })
+    console.log("PostgreSQL connection successful: ", {
+      result: result.rows[0],
+    })
   } catch (error) {
     console.error("PostgreSQL connection error:", { error })
   }
