@@ -1,6 +1,11 @@
-import { createSlice } from "@reduxjs/toolkit" 
+import { createSlice, PayloadAction } from "@reduxjs/toolkit" 
+import { Product } from "types"
 
-const mockedProducts = Product[] = [
+export interface ProductState {
+  products: Product[]
+}
+
+const mockedProducts: Product[] = [
   {
     id: "1",
     name: "Wireless Headphones",
@@ -57,21 +62,34 @@ const mockedProducts = Product[] = [
   },
 ]
 
+const initialState: ProductState = {
+  products: mockedProducts,
+}
 
 const productSlice = createSlice({
   name: 'product',
-  initialState: {
-    value: mockedProducts
-  },
+  initialState,
   reducers: {
-    addMockedProject: state => {
-      
-      state.value += 1
+    addProduct: (state, action: PayloadAction<Product>) => {
+      state.products.push(action.payload)
     },
-    decremented: state => {
-      state.value -= 1
-    }
-  }
+    removeProduct: (state, action: PayloadAction<string>) => {
+      state.products = state.products.filter(product => product.id !== action.payload)
+    },
+    updateProduct: (state, action: PayloadAction<Product>) => {
+      const index = state.products.findIndex(product => product.id === action.payload.id)
+      if (index !== -1) {
+        state.products[index] = action.payload
+      }
+    },
+    updateProductStock: (state, action: PayloadAction<{ id: string; stock: number }>) => {
+      const product = state.products.find(p => p.id === action.payload.id)
+      if (product) {
+        product.stock = action.payload.stock
+      }
+    },
+  },
 })
 
-export default productSlice
+export const { addProduct, removeProduct, updateProduct, updateProductStock } = productSlice.actions
+export default productSlice.reducer
