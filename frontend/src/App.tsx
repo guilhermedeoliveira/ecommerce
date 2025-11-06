@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react"
 import ProductCard from "./components/ProductCard"
+import FeaturedProducts from "./components/FeaturedProducts"
 import Cart from "./components/Cart/Cart"
 import { Product, CartItem } from "../../types"
 import { GlobalStyles } from "./styles/GlobalStyles"
@@ -95,15 +96,18 @@ function App() {
               onRemoveItem={removeFromCart}
             />
           ) : (
-            <ProductsGrid>
-              {products.map((product) => (
-                <ProductCard
-                  key={product.id}
-                  product={product}
-                  onAddToCart={addToCart}
-                />
-              ))}
-            </ProductsGrid>
+            <>
+              <FeaturedProducts onAddToCart={addToCart} />
+              <ProductsGrid>
+                {products.map((product) => (
+                  <ProductCard
+                    key={product.id}
+                    product={product}
+                    onAddToCart={addToCart}
+                  />
+                ))}
+              </ProductsGrid>
+            </>
           )}
         </Container>
       </AppContainer>

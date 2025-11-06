@@ -4,6 +4,7 @@ import dotenv from "dotenv"
 
 import pool from "./config/postgres"
 import { connectMongoDB } from "./config/mongodb"
+import redis from "./config/redis"
 import productsRouter from "./routes/products"
 
 dotenv.config()
@@ -46,6 +47,14 @@ const testConnections = async () => {
     console.log("MongoDB connection successful")
   } catch (error) {
     console.error("MongoDB connection error:", { error })
+  }
+
+  // Test Redis connection
+  try {
+    await redis.ping()
+    console.log("Redis connection successful")
+  } catch (error) {
+    console.error("Redis connection error:", { error })
   }
 }
 
