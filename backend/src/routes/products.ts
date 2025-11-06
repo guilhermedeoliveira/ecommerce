@@ -63,12 +63,41 @@ router.get("/featured", async (req: Request, res: Response) => {
 })
 
 // Get product by id
-router.get("/:id", (req: Request, res: Response) => {
-  const product = products.find((p) => p.id === req.params.id)
-  if (product) {
-    res.json(product)
-  } else {
-    res.status(404).json({ message: "Product not found" })
+router.get("/:id", async (req: Request, res: Response) => {
+  try {
+    // Query PostgreSQL for the product
+    const result = await pool.query(
+      "SELECT * FROM products WHERE id = $1",
+      [req.params.id]
+    )
+
+    if (result.rows.length === 0) {
+      return res.status(404).json({ message: "Product not found" })
+    }
+
+    // Increment access_count
+    await pool.query(
+      "UPDATE products SET access_count = access_count + 1, updated_at = CURRENT_TIMESTAMP WHERE id = $1",
+      [req.params.id]
+    )
+
+    // Invalidate Redis cache so featured products refresh with new access counts
+    await redis.del("featured_products")
+
+    // Format and return the product
+    const product = result.rows[0]
+    res.json({
+      id: product.id.toString(),
+      name: product.name,
+      description: product.description,
+      price: parseFloat(product.price),
+      image: product.image_url,
+      category: product.category || "",
+      stock: product.stock || 0,
+    })
+  } catch (error) {
+    console.error("Error fetching product:", error)
+    res.status(500).json({ message: "Error fetching product" })
   }
 })
 
